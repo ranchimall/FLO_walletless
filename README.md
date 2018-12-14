@@ -3,13 +3,11 @@ FLO walletless Transactions
 
 These are client side scripts that can send FLO transactions to the blockchain
 
-Use respective directory for mainnet and testnet
+NOTE : Use respective directory for mainnet and testnet
 
--- FLO_sendData
-This webpage sends the FLO comments (data) to the blockchain
+## Instructions to use 
 
-
-## Instructions to use
+Note : open the respective html file in browser
 
 1. Enter the sender's address (for multiple address use comma `,`)
 2. Click get balance.
@@ -21,3 +19,12 @@ This webpage sends the FLO comments (data) to the blockchain
 8. Click Send
 9. Enter the private key for the address in the prompt
 10. The transaction will be sent to the blockchain and returns the txid (returns error if any).
+
+### FLO_sendData
+This webpage sends the FLO comments (data) to the blockchain
+The default amount is set to 0.002 in testnet and 0.0002 in mainnet
+Transcation fee is set to 0.0005 in testnet and 0.00005 in mainnet
+
+### FLO_sendAmt_Data
+This webpage sends the FLO amount and comments (data) to the blockchain
+Transcation fee is set to 0.0005 both in mainnet and testnet
