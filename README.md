@@ -5,11 +5,11 @@ These are client side scripts that can send FLO transactions to the blockchain
 
 Use respective directory for mainnet and testnet
 
-## FLO_sendData
+-- FLO_sendData
 This webpage sends the FLO comments (data) to the blockchain
 
 
-Instructions to use
+## Instructions to use
 
 1. Enter the sender's address (for multiple address use comma `,`)
 2. Click get balance.
