@@ -37,5 +37,5 @@ This webpage views the FLO data received by the given address.
 4. FloData received by the address will be displayed
 
 There are 2 modes
-All : display floData received from all address
-Filter : display floData received from given address
+1. All : display floData received from all address
+2. Filter : display floData received from given address
