@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+    <h1>FLO</h1>
+	Enter receiver Address : <input type="text" id="receiver"><br/>
+    Enter sender address : <input type="text" id="sender">
+	<input type="button" id="type" value="Mode : Filter" onclick="changeType()"><br/>
+	<button id="getData" onclick="getData()">getData</button>
+	<div id="dispMsg"></div>
+
+
+	
+	<script>
+        const mainnet = `https://livenet.flocha.in`;
+        const testnet = `https://testnet.flocha.in`;
+
+        let server = mainnet;
+		
+		function ajax(method, uri){
+			var request = new XMLHttpRequest();
+			var url = `${server}/${uri}`
+			console.log(url)
+			var result;
+			request.open(method,url , false);
+			request.onload = function () {
+				if (request.status >= 200 && request.status < 400)
+					result = this.response;	
+				else {
+					console.log('error');
+					result = false;
+				}
+			};
+			request.send();
+			console.log(result);
+			return result;
+		}
+		function is_alphanumeric(inputtxt) {
+            var letters = /^[0-9a-zA-Z]+$/;
+            if (inputtxt.match(letters)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    </script>
+
+   <script>
+	
+	function changeType(){
+		type = document.getElementById("type");
+		if(type.value == "Mode : Filter"){
+			type.value = "Mode : All";
+			document.getElementById("sender").disabled = true;
+			}
+		else if(type.value == "Mode : All"){
+			document.getElementById("sender").disabled = false;
+			type.value = "Mode : Filter";
+			}
+   }
+	function getData(){
+		
+		var receiver = document.getElementById("receiver").value;
+		if(document.getElementById("type").value == "Mode : All")
+			var mode = 1;
+		else{
+			var mode = 2;
+			var sender = document.getElementById("sender").value;
+			if (!is_alphanumeric(sender) || sender.length<1){
+					alert(`Invalid address : ${sender}`);
+					return;
+			}
+		}
+		if (!is_alphanumeric(receiver) || receiver.length<1){
+					alert(`Invalid address : ${receiver}`);
+					return;
+		}
+		var result = "";
+		var response = ajax("GET",`api/txs/?address=${receiver}`);
+		var tx = JSON.parse(response).txs;
+		console.log("Yes");
+		for(var x = 0; x < tx.length; x++)
+			for(var y = 0; y <tx[x].vin.length ;y++)
+				if(mode==1||tx[x].vin[y].addr==sender){
+					result += `${tx[x].floData}<hr>`;
+					console.log(tx[x].floData);
+					break;
+			}
+		
+		var dispMsg = document.getElementById("dispMsg");
+		if(result=="")
+			dispMsg.innerHTML = "<h2>Sorry! No Flo Data received! </h2>";
+		else
+			dispMsg.innerHTML = "<h2>Received FLO Data : </h2><hr>"+result;
+
+	}
+	</script>
+ 
+           
+	</body>
+	</html>
