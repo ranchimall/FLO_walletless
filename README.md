@@ -28,3 +28,13 @@ Transcation fee is set to 0.0005 in testnet and 0.00005 in mainnet
 ### FLO_sendAmt_Data
 This webpage sends the FLO amount and comments (data) to the blockchain
 Transcation fee is set to 0.0005 both in mainnet and testnet
+
+### FLO_getData
+This webpage views the FLO data received by the given address.
+1. Enter receiver address
+2. Enter sender address or choose 'All' mode
+3. Click getData
+4. FloData received by the address will be displayed
+There are 2 modes
+All : display floData received from all address
+Filter : display floData received from given address
