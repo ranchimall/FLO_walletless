@@ -35,6 +35,7 @@ This webpage views the FLO data received by the given address.
 2. Enter sender address or choose 'All' mode
 3. Click getData
 4. FloData received by the address will be displayed
+
 There are 2 modes
 All : display floData received from all address
 Filter : display floData received from given address
