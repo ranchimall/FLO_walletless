@@ -10,7 +10,8 @@ NOTE : Use respective directory/file for mainnet and testnet
 Note : open the respective html file in browser
 
 Choose the function you require. (Click button)
-There are 3 functions :
+
+__There are 3 functions :
 
 ### Address Generator
 This function can generate new FLO address and secret key pair (or) recover FLO address from given secret key.
