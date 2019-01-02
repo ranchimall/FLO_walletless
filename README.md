@@ -17,6 +17,7 @@ There are 3 functions :
 ### Address Generator
 This function can generate new FLO address and secret key pair (or) recover FLO address from given secret key.
 1. Click on the 'Generate New Address' button to generate FLO address and secret key pair.
+
 (or)
 1. Click on the 'Recover FLO Address' button 
 2. Enter the secret key in the prompt to recover the FLO address. 
