@@ -11,7 +11,8 @@ Note : open the respective html file in browser
 
 Choose the function you require. (Click button)
 
-__There are 3 functions :
+There are 3 functions :
+----------------------
 
 ### Address Generator
 This function can generate new FLO address and secret key pair (or) recover FLO address from given secret key.
