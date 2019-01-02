@@ -61,40 +61,54 @@
 			type.value = "Mode : Filter";
 			}
    }
+   </script>
+   <script>
 	function getData(){
 		
-		var receiver = document.getElementById("receiver").value;
+		var receiverList = document.getElementById("receiver").value;
+		receiverList = receiverList.split(',');
+		receiverList = Array.from(new Set(receiverList));
+		
+		
 		if(document.getElementById("type").value == "Mode : All")
 			var mode = 1;
 		else{
 			var mode = 2;
-			var sender = document.getElementById("sender").value;
-			if (!is_alphanumeric(sender) || sender.length<1){
-					alert(`Invalid address : ${sender}`);
-					return;
-			}
+			var senderList = document.getElementById("sender").value;
+			senderList = senderList.split(',');
+			senderList = Array.from(new Set(senderList));
+			senderList.forEach(function(sender){
+				if (!is_alphanumeric(sender) || sender.length<1){
+						alert(`Invalid address : ${sender}`);
+						return;
+				}
+			});
 		}
-		if (!is_alphanumeric(receiver) || receiver.length<1){
-					alert(`Invalid address : ${receiver}`);
-					return;
-		}
+
 		var result = "";
-		var response = ajax("GET",`api/txs/?address=${receiver}`);
-		var tx = JSON.parse(response).txs;
-		console.log("Yes");
-		for(var x = 0; x < tx.length; x++)
-			for(var y = 0; y <tx[x].vin.length ;y++)
-				if(mode==1||tx[x].vin[y].addr==sender){
-					result += `${tx[x].floData}<hr>`;
-					console.log(tx[x].floData);
-					break;
-			}
 		
+		receiverList.forEach(function(receiver){
+			if (!is_alphanumeric(receiver) || receiver.length<1){
+						alert(`Invalid address : ${receiver}`);
+						return;
+				}
+			var response = ajax("GET",`api/txs/?address=${receiver}`);
+			var tx = JSON.parse(response).txs;
+			console.log("Yes");
+			for(var x = 0; x < tx.length; x++)
+				for(var y = 0; y <tx[x].vin.length ;y++)
+					if(mode==1||senderList.indexOf(tx[x].vin[y].addr) >= 0){
+						var time = new Date(tx[x].time*1000);
+						result += '<tr><td>'+tx[x].vin[y].addr+'</td><td>'+receiver+'</td><td>'+time+'</td><td>'+tx[x].floData+'</td></tr>';
+						console.log(tx[x].vin[y].addr+":"+receiver+":"+tx[x].floData);
+						break;
+					}
+		});
 		var dispMsg = document.getElementById("dispMsg");
 		if(result=="")
 			dispMsg.innerHTML = "<h2>Sorry! No Flo Data received! </h2>";
 		else
-			dispMsg.innerHTML = "<h2>Received FLO Data : </h2><hr>"+result;
+			dispMsg.innerHTML = '<h2>Received FLO Data : </h2><br/><table border="1"><tr><td>Sender</td><td>Receiver</td><td>Time</td><td>FLO data</td></tr>'+result+"</table>";
 
 	}
 	</script>
